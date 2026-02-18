@@ -3,7 +3,7 @@
   <ion-buttons slot="start">
     <ion-back-button default-href="#"></ion-back-button>
   </ion-buttons>
-  <ion-title>{{lista?.nome}}</ion-title>
+  <ion-title>{{lista.nome}}</ion-title>
 </ion-toolbar>
 </ion-header>
 
@@ -26,12 +26,40 @@
   </ion-item>
 }
 @else if (aba === "custo") {
-  <ion-item *ngFor="let c of comparacoes">
-    {{c.nome}} - {{c.peso}} - R${{c.preco}}
-    <ion-note slot="end">
-      {{c.precoPorKg | number:'1.2-2'}} /kg
-    </ion-note>
-  </ion-item>
-}
+<ion-item>
+<ion-input
+  name="nome1"
+  placeholder="Nome do item 1"
+  [(ngModel)]="item1.nome">
+</ion-input>
 
+<ion-input
+  name="quantidade1"
+  type="number"
+  placeholder="Quantidade do item 1"
+  [(ngModel)]="item1.quantidade">
+</ion-input>
+
+<ion-input
+  name="preco1"
+  type="number"
+  placeholder="Preço do item 1"
+  [(ngModel)]="item1.preco">
+</ion-input>
+</ion-item>
+<ion-item>
+<ion-input name="nome2" [(ngModel)]="item2.nome"></ion-input>
+<ion-input name="quantidade2" type="number" [(ngModel)]="item2.quantidade"></ion-input>
+<ion-input name="preco2" type="number" [(ngModel)]="item2.preco"></ion-input>
+</ion-item>
+<ion-button expand="block" (click)="compararCustoBeneficio()">
+  Comparar custo-benefício
+</ion-button>
+<ion-item *ngIf="comparado">
+  <ion-label>
+    <h2>{{comparacoes[0].nome}}</h2>
+    <p>Preço por kg: R${{comparacoes[0].precoPorKg | number:'1.2-2'}}</p>
+  </ion-label>
+</ion-item>
+}
 </ion-content>

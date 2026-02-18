@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, checkmarkCircleOutline, trendingUpOutline } from 'ionicons/icons';
 
-import { IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox } from '@ionic/angular/standalone';
+import { IonContent, IonBackButton, IonLabel, IonButtons, IonInput, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox } from '@ionic/angular/standalone';
+import { Item } from 'src/app/models/item';
 
 addIcons({
   trendingUpOutline,
@@ -20,12 +21,24 @@ addIcons({
   templateUrl: './lista-detalhe.page.html',
   styleUrls: ['./lista-detalhe.page.scss'],
   standalone: true,
-  imports: [IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox]
+  imports: [IonContent, IonBackButton, IonLabel,IonButtons, IonInput, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox]
 })
 
 export class ListaDetalhePage implements OnInit {
 
   lista!: Lista;
+  item1: Item = {
+  nome: '',
+  quantidade: 0,
+  preco: 0
+};
+
+  item2: Item = {
+  nome: '',
+  quantidade: 0,
+  preco: 0
+};
+  comparado: boolean | undefined;
 
   aba = 'itens';
 
@@ -60,6 +73,24 @@ export class ListaDetalhePage implements OnInit {
 
   mostrarCusto(){
     this.aba = 'custo';
+  }
+
+  compararCustoBeneficio() {
+    console.log(this.item1, this.item2);
+    
+    if (this.item1.nome && this.item2.nome) {
+      this.comparado = true;
+      this.comparacoes = [
+        { nome: this.item1.nome, peso: this.item1.quantidade, preco: this.item1.preco },
+        { nome: this.item2.nome, peso: this.item2.quantidade, preco: this.item2.preco },
+      ].map(item => ({ ...item, precoPorKg: item.preco / item.peso }));
+      //quero que retorne somente o item com o menor precoPorKg
+      this.comparacoes = this.comparacoes.sort((a, b) => a.precoPorKg - b.precoPorKg);
+      console.log(this.comparacoes[0]);
+      
+    } else {
+      alert('Preencha os dados dos itens para comparar.');
+    }
   }
 
   
