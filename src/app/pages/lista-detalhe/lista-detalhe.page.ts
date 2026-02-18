@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, checkmarkCircleOutline, trendingUpOutline } from 'ionicons/icons';
 
-import { IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox } from '@ionic/angular/standalone';
 
 addIcons({
   trendingUpOutline,
@@ -20,7 +20,7 @@ addIcons({
   templateUrl: './lista-detalhe.page.html',
   styleUrls: ['./lista-detalhe.page.scss'],
   standalone: true,
-  imports: [IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton]
+  imports: [IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton, IonCheckbox]
 })
 
 export class ListaDetalhePage implements OnInit {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonButtons, IonBackButton, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
 import { ListaService } from '../../services/lista';
 import { Router } from '@angular/router';
 import { Lista } from '../../models/lista';
@@ -17,7 +17,7 @@ addIcons({
   templateUrl: './listas.page.html',
   styleUrls: ['./listas.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonFab, IonFabButton, IonIcon]
+  imports: [IonContent, IonButtons, IonBackButton, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonFab, IonFabButton, IonIcon]
 })
 export class ListasPage implements OnInit {
 
@@ -51,6 +51,10 @@ export class ListasPage implements OnInit {
       if (listasSalvas.length > 0) {
     this.listas = listasSalvas;
   }
+  }
+
+  goLogin() {
+    this.router.navigate(['']);
   }
 
   abrir(lista: Lista) {

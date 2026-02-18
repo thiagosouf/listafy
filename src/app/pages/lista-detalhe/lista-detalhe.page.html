@@ -22,7 +22,7 @@
 
 @if (aba === "itens") {
   <ion-item *ngFor="let item of lista.itens">
-    {{item.nome}} - {{item.quantidade}} - R${{item.preco}}
+    <ion-checkbox label-placement="end">{{item.nome}} - {{item.quantidade}} - R${{item.preco}}</ion-checkbox>
   </ion-item>
 }
 @else if (aba === "custo") {

@@ -27,7 +27,9 @@ export class LoginPage implements OnInit {
 
    entrar() {
     if (this.authService.login(this.email, this.senha)) {
-      this.router.navigate(['/listas']);
+        this.email = '';
+        this.senha = '';
+        this.router.navigate(['/listas']);
     }
   }
 
