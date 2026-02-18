@@ -11,6 +11,10 @@ export class ListaService {
     return JSON.parse(localStorage.getItem(this.STORAGE) || '[]');
   }
 
+  setListas(listas: Lista[]) {
+    localStorage.setItem(this.STORAGE, JSON.stringify(listas));
+  }
+
   salvarLista(lista: Lista) {
     const listas = this.getListas();
     listas.push(lista);
