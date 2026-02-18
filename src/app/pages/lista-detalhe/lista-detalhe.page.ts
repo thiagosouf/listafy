@@ -5,12 +5,14 @@ import {Lista} from '../../models/lista';
 import { ListaService } from 'src/app/services/lista';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { trendingUpOutline } from 'ionicons/icons';
+import { arrowBackOutline, checkmarkCircleOutline, trendingUpOutline } from 'ionicons/icons';
 
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton } from '@ionic/angular/standalone';
 
 addIcons({
-  trendingUpOutline
+  trendingUpOutline,
+  arrowBackOutline,
+  checkmarkCircleOutline
 });
 
 @Component({
@@ -18,7 +20,7 @@ addIcons({
   templateUrl: './lista-detalhe.page.html',
   styleUrls: ['./lista-detalhe.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton]
+  imports: [IonContent, IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonFab, IonFabButton, IonItem, IonIcon, IonNote, IonButton]
 })
 
 export class ListaDetalhePage implements OnInit {

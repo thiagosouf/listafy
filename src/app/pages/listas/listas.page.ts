@@ -5,6 +5,12 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonFab, 
 import { ListaService } from '../../services/lista';
 import { Router } from '@angular/router';
 import { Lista } from '../../models/lista';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
+
+addIcons({
+  add
+});
 
 @Component({
   selector: 'app-listas',
