@@ -1,65 +1,104 @@
 <ion-header>
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-back-button default-href="#"></ion-back-button>
-  </ion-buttons>
-  <ion-title>{{lista.nome}}</ion-title>
-</ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{lista.nome}}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
 
-  <ion-button class="itens" value ="itens" (click)="aba = 'itens'" [color]="aba === 'itens' ? 'primary' : 'medium'">
+  <ion-button class="itens" value="itens" (click)="aba = 'itens'" [color]="aba === 'itens' ? 'primary' : 'medium'">
     Itens
   </ion-button>
+  <div class="bottons">
+    <ion-fab vertical="bottom" horizontal="start" >
+      <ion-fab-button (click)="aba = 'custo'">
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button id="open-modal" expand="block">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="aba = 'custo'">
-      <ion-icon name="trending-up-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-@if (aba === "itens") {
+  @if (aba === "itens") {
   <ion-item *ngFor="let item of lista.itens">
     <ion-checkbox label-placement="end">{{item.nome}} - {{item.quantidade}} - R${{item.preco}}</ion-checkbox>
   </ion-item>
-}
-@else if (aba === "custo") {
-<ion-item>
-<ion-input
-  name="nome1"
-  placeholder="Nome do item 1"
-  [(ngModel)]="item1.nome">
-</ion-input>
+  }
+  @else if (aba === "custo") {
+  <ion-item>
+    <ion-input name="nome1" placeholder="Nome do item 1" [(ngModel)]="item1.nome">
+    </ion-input>
 
-<ion-input
-  name="quantidade1"
-  type="number"
-  placeholder="Quantidade do item 1"
-  [(ngModel)]="item1.quantidade">
-</ion-input>
+    <ion-input name="quantidade1" type="number" placeholder="Quantidade do item 1" [(ngModel)]="item1.quantidade">
+    </ion-input>
 
-<ion-input
-  name="preco1"
-  type="number"
-  placeholder="Preço do item 1"
-  [(ngModel)]="item1.preco">
-</ion-input>
-</ion-item>
-<ion-item>
-<ion-input name="nome2" [(ngModel)]="item2.nome"></ion-input>
-<ion-input name="quantidade2" type="number" [(ngModel)]="item2.quantidade"></ion-input>
-<ion-input name="preco2" type="number" [(ngModel)]="item2.preco"></ion-input>
-</ion-item>
-<ion-button expand="block" (click)="compararCustoBeneficio()">
-  Comparar custo-benefício
-</ion-button>
-<ion-item *ngIf="comparado">
-  <ion-label>
-    <h2>{{comparacoes[0].nome}}</h2>
-    <p>Preço por kg: R${{comparacoes[0].precoPorKg | number:'1.2-2'}}</p>
-  </ion-label>
-</ion-item>
-}
+    <ion-input name="preco1" type="number" placeholder="Preço do item 1" [(ngModel)]="item1.preco">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input name="nome2" [(ngModel)]="item2.nome"></ion-input>
+    <ion-input name="quantidade2" type="number" [(ngModel)]="item2.quantidade"></ion-input>
+    <ion-input name="preco2" type="number" [(ngModel)]="item2.preco"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="compararCustoBeneficio()">
+    Comparar custo-benefício
+  </ion-button>
+  <ion-item *ngIf="comparado">
+    <ion-label>
+      <h2>{{comparacoes[0].nome}}</h2>
+      <p>Preço por kg: R${{comparacoes[0].precoPorKg | number:'1.2-2'}}</p>
+    </ion-label>
+  </ion-item>
+  }
 </ion-content>
+<div class="ion-padding">
+  <!-- <ion-button id="open-modal" expand="block">Open</ion-button> -->
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancela</ion-button>
+          </ion-buttons>
+          <ion-title>Add Itens</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirma</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content >
+        <ion-item class="inputs">
+          <ion-input
+            label="Nome do item"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Nome do item"
+            [(ngModel)]="name"
+          ></ion-input>
+          <ion-input
+            label="Quantidade"
+            labelPlacement="stacked"
+            type="number"
+            placeholder="Quantidade"
+            [(ngModel)]="qt"
+          ></ion-input>
+          <ion-input
+            label="Preço"
+            labelPlacement="stacked"
+            type="number"
+            placeholder="Preço"
+            [(ngModel)]="pr"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</div>

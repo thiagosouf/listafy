@@ -20,29 +20,20 @@ addIcons({
   imports: [IonContent, IonButtons, IonBackButton, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonFab, IonFabButton, IonIcon]
 })
 export class ListasPage implements OnInit {
-
-  listas: Lista[] = [
-    { id: '1', nome: 'Lista 1', itens: [
-        { id: '1', nome: 'Item 1', quantidade: 2, preco: 10 },
-        { id: '2', nome: 'Item 2', quantidade: 1, preco: 20 },
-    ] },
-    { id: '2', nome: 'Lista 2', itens: [] },
-  ];
-  //quero adicionar a variavel listas no local storage para que ela seja persistida mesmo que o usuário feche o aplicativo
+  listas: Lista[] = [];
   salvarListas() {
     this.listaService.setListas(this.listas);
     console.log(this.listas);
-    
   }
-
-
-
   constructor(
     private listaService: ListaService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    const listasSalvas = this.listaService.getListas();
+    console.log(listasSalvas);
+    
   }
 
     ionViewWillEnter() {
@@ -61,4 +52,17 @@ export class ListasPage implements OnInit {
     this.router.navigate(['/lista', lista.id]);
   }
 
+//crie a função addLista() para adicionar uma nova lista, a função deve chamar um modal com um formulário para o usuário preencher o nome da lista, ao salvar o modal deve adicionar a nova lista à lista de listas e fechar o modal.
+  addLista() {
+    const nome = prompt('Digite o nome da nova lista:');
+    if (nome) {
+      const novaLista: Lista = {
+        id: Date.now().toString(),
+        nome,
+        itens: []
+      };
+      this.listas.push(novaLista);
+      this.salvarListas();
+    }
+  }
 }
